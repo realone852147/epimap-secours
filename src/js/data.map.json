@@ -1115,7 +1115,7 @@
     "others": {
         "id": "others",
         "name": "Others maps",
-        "last_update": "May 2022",
+        "last_update": "October 2025",
         "buildings": {
             "prologin": {
                 "id": "",
@@ -1124,8 +1124,8 @@
                 "floors": {
                     "2022": {
                         "name": "Finale Prologin",
-                        "last_update": "May 2022",
-                        "floor": "2022",
+                        "last_update": "October 2025",
+                        "floor": "2025",
                         "rooms": {}
                     }
                 }
@@ -1138,7 +1138,7 @@
                     "2023": {
                         "name": "Camping WE 2023",
                         "last_update": "Jun. 2022",
-                        "floor": 2023,
+                        "floor": "2023",
                         "rooms": {}
                     }
                 }
