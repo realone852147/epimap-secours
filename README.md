@@ -1,5 +1,5 @@
 # Epimap
-Project available on https://epita-map.fr
+Project available on https://epimap.fr
 
 Web application for Epita campus maps.
 Epimap is not affiliated with EPITA or IONIS Education Group, 

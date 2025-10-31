@@ -1,0 +1,9 @@
+services:
+  www:
+    image: httpd:latest
+    container_name: apache_server
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+        - ./src:/usr/local/apache2/htdocs/:z
