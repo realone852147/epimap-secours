@@ -14,7 +14,8 @@ Maps are based on a previous work of Ivan « Colona » Delalande (map.epita.eu) 
 ## Privacy
 
 For details about our security, data protection, and sustainability practices, please refer to our [Privacy Policy](./privacy.md).
-<br /> 
+<br />
+
 ## Documentation
 
 You can find the full documentation [here](./docs/README.md). 
