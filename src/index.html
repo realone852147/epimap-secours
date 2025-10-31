@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Epita-Map: Trouvez facilement votre salle à Epita et oubliez les 404 Room Not Found" />
-<meta name="keywords" content="Epimap Epita Map Plan Campus Epitech KB Villejuif" />
-<meta name="author" content="Nathan Chevalier & Mateo S." />
-<meta name="theme-color" content="#0d1230" />
-
-<!-- Open Graph / SEO -->
-<meta property="og:title" content="Epita-Map - Plans des campus"/>
-<meta property="og:description" content="Trouvez facilement votre salle à Epita"/>
-<meta property="og:image" content="img/og-image.png"/>
-<meta property="og:type" content="website"/>
-
-<title>Epita-Map</title>
-<link rel="icon" type="image/png" href="img/favicon.png" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Epita-Map: Trouvez facilement votre salle à Epita et oubliez les 404 Room Not Found" />
+    <meta name="keywords" content="Epimap Epita Map Plan Campus Epitech KB Villejuif" />
+    <meta name="author" content="Nathan Chevalier & Mateo S." />
+    <meta name="theme-color" content="#0d1230" />
+    <title>Epimap</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
 
 <style>
-  /* Reset & Base */
-  * {
+/* Reset & Base */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-  body {
+body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: #f5f5f5;
     color: #333;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
+    overflow-x: hidden;
+}
 
-  body.darkmode {
+body.darkmode {
     background: #0d1230;
     color: #e0e0e0;
-  }
+}
 
-  /* Header */
-  header {
+/* Header */
+header {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -48,34 +41,39 @@
     position: sticky;
     top: 0;
     z-index: 100;
-  }
+}
 
-  body.darkmode header {
+body.darkmode header {
     background: #1a1f3a;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
+}
 
-  #btn-menu {
+#btn-menu {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     padding: 8px;
-  }
+    transition: transform 0.2s;
+}
 
-  #btn-menu div {
-    width: 25px;
+#btn-menu:hover {
+    transform: scale(1.1);
+}
+
+#btn-menu div {
+    width: 28px;
     height: 3px;
     background: #333;
     border-radius: 2px;
     transition: 0.3s;
-  }
+}
 
-  body.darkmode #btn-menu div {
+body.darkmode #btn-menu div {
     background: #e0e0e0;
-  }
+}
 
-  header input[type="text"] {
+header input[type="text"] {
     flex: 1;
     padding: 0.75rem 1rem;
     border: 2px solid #ddd;
@@ -83,19 +81,19 @@
     font-size: 1rem;
     outline: none;
     transition: border 0.2s;
-  }
+}
 
-  header input[type="text"]:focus {
+header input[type="text"]:focus {
     border-color: #0066cc;
-  }
+}
 
-  body.darkmode header input[type="text"] {
+body.darkmode header input[type="text"] {
     background: #2a2f4a;
     border-color: #3a3f5a;
     color: #e0e0e0;
-  }
+}
 
-  header button {
+header button {
     padding: 0.75rem 1.5rem;
     background: #0066cc;
     color: white;
@@ -104,166 +102,190 @@
     cursor: pointer;
     font-weight: 600;
     transition: background 0.2s;
-  }
+}
 
-  header button:hover {
+header button:hover {
     background: #0052a3;
-  }
+}
 
-  header button::before {
+header button::before {
     content: "🔍";
-    margin-right: 0.5rem;
-  }
+}
 
-  /* Settings Button */
-  #btn-settings {
+/* Settings Button */
+#btn-settings {
     position: fixed;
-    top: 5rem;
+    top: 6rem;
     right: 2rem;
     width: 50px;
     height: 50px;
     background: #0066cc;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     z-index: 99;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
-  }
+}
 
-  #btn-settings:hover {
+#btn-settings:hover {
     transform: scale(1.1);
-  }
+}
 
-  #btn-settings::before {
+#btn-settings::before {
     content: "⚙️";
     font-size: 1.5rem;
-  }
+}
 
-  /* Navigation Menu */
-  #nav-menu {
+/* Navigation Menu */
+#nav-menu {
     position: fixed;
-    left: -320px;
+    left: -400px;
     top: 0;
-    width: 300px;
+    width: 380px;
     height: 100vh;
     background: white;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
     padding: 2rem;
     transition: left 0.3s ease;
     z-index: 101;
     overflow-y: auto;
-  }
+}
 
-  body.darkmode #nav-menu {
+body.darkmode #nav-menu {
     background: #1a1f3a;
-  }
+}
 
-  #nav-menu.active {
+#nav-menu.active {
     left: 0;
-  }
+}
 
-  #nav-menu .btn-back {
-    display: inline-block;
-    margin-bottom: 2rem;
-    padding: 0.5rem 1rem;
-    background: #0066cc;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-  }
-
-  #nav-menu .btn-back:hover {
-    background: #0052a3;
-  }
-
-  #nav-menu ul {
+#nav-menu ul {
     list-style: none;
-  }
+}
 
-  #nav-menu li {
-    margin-bottom: 0.5rem;
-  }
+#nav-menu > ul > li {
+    margin-bottom: 1rem;
+}
 
-  #nav-menu a.menu-itm-campus {
+#nav-menu a {
     display: block;
-    padding: 1rem;
-    background: #f0f0f0;
+    padding: 0.75rem 1rem;
     color: #333;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
+    border-radius: 6px;
     transition: background 0.2s;
-  }
+    font-weight: 500;
+}
 
-  body.darkmode #nav-menu a.menu-itm-campus {
-    background: #2a2f4a;
+body.darkmode #nav-menu a {
     color: #e0e0e0;
-  }
+}
 
-  #nav-menu a.menu-itm-campus:hover {
+#nav-menu a.menu-itm-campus {
+    background: #0066cc;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+#nav-menu a.menu-itm-campus:hover {
+    background: #0052a3;
+}
+
+#nav-menu a.menu-itm-building {
+    background: #f0f0f0;
+    font-weight: 600;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+body.darkmode #nav-menu a.menu-itm-building {
+    background: #2a2f4a;
+}
+
+#nav-menu a.menu-itm-building:hover {
     background: #e0e0e0;
-  }
+}
 
-  body.darkmode #nav-menu a.menu-itm-campus:hover {
+body.darkmode #nav-menu a.menu-itm-building:hover {
     background: #3a3f5a;
-  }
+}
 
-  #infooter {
+#nav-menu a.menu-itm-stage {
+    background: transparent;
+    margin-left: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+#nav-menu a.menu-itm-stage:hover {
+    background: #f9f9f9;
+}
+
+body.darkmode #nav-menu a.menu-itm-stage:hover {
+    background: #2a2f4a;
+}
+
+#nav-menu ul ul {
+    margin-top: 0.5rem;
+}
+
+#infooter {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid #ddd;
     font-size: 0.85rem;
     color: #666;
-  }
+    line-height: 1.6;
+}
 
-  body.darkmode #infooter {
+body.darkmode #infooter {
     border-color: #3a3f5a;
     color: #999;
-  }
+}
 
-  #infooter a {
+#infooter a {
     color: #0066cc;
     text-decoration: none;
-  }
+}
 
-  #infooter a:hover {
+#infooter a:hover {
     text-decoration: underline;
-  }
+}
 
-  /* Settings Panel */
-  #settings {
+/* Settings Panel */
+#settings {
     position: fixed;
-    right: -320px;
+    right: -400px;
     top: 0;
-    width: 300px;
+    width: 380px;
     height: 100vh;
     background: white;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    box-shadow: -2px 0 12px rgba(0,0,0,0.15);
     padding: 2rem;
     transition: right 0.3s ease;
     z-index: 101;
     overflow-y: auto;
-  }
+}
 
-  body.darkmode #settings {
+body.darkmode #settings {
     background: #1a1f3a;
-  }
+}
 
-  #settings.active {
+#settings.active {
     right: 0;
-  }
+}
 
-  #settings h3 {
+#settings h3 {
     margin-bottom: 2rem;
     font-size: 1.5rem;
-  }
+}
 
-  .setting {
+.setting {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -271,26 +293,64 @@
     padding: 1rem;
     background: #f9f9f9;
     border-radius: 8px;
-  }
+}
 
-  body.darkmode .setting {
+body.darkmode .setting {
     background: #2a2f4a;
-  }
+}
 
-  /* Toggle Switch */
-  .onoffswitch {
+.setting select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+}
+
+body.darkmode .setting select {
+    background: #1a1f3a;
+    border-color: #3a3f5a;
+    color: #e0e0e0;
+}
+
+#settings > span {
+    display: block;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+body.darkmode #settings > span {
+    border-color: #3a3f5a;
+    color: #999;
+}
+
+#settings a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+#settings a:hover {
+    text-decoration: underline;
+}
+
+/* Toggle Switch */
+.onoffswitch {
     position: relative;
     width: 60px;
-    user-select: none;
-  }
+}
 
-  .onoffswitch-checkbox {
+.onoffswitch-checkbox {
     position: absolute;
     opacity: 0;
     pointer-events: none;
-  }
+}
 
-  .onoffswitch-label {
+.onoffswitch-label {
     display: block;
     overflow: hidden;
     cursor: pointer;
@@ -300,9 +360,9 @@
     border-radius: 30px;
     background-color: #ccc;
     transition: background-color 0.3s ease-in;
-  }
+}
 
-  .onoffswitch-label:before {
+.onoffswitch-label:before {
     content: "";
     display: block;
     width: 26px;
@@ -315,430 +375,695 @@
     right: 28px;
     border-radius: 50%;
     transition: all 0.3s ease-in 0s;
-  }
+}
 
-  .onoffswitch-checkbox:checked + .onoffswitch-label {
+.onoffswitch-checkbox:checked + .onoffswitch-label {
     background-color: #0066cc;
-  }
+}
 
-  .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 2px;
-  }
+}
 
-  /* Container */
-  #container {
+/* Container & Map */
+#container {
     width: 100%;
-    height: 80vh;
+    height: calc(100vh - 80px);
     min-height: 600px;
     overflow: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
-  }
+    position: relative;
+}
 
-  body.darkmode #container {
+body.darkmode #container {
     background: #0d1230;
-  }
+}
 
-  #container svg {
-    max-width: 100%;
-    max-height: 100%;
-  }
+#container.darkmap {
+    background: #0d1230;
+}
 
-  /* Privacy Page */
-  .privacy-page {
-    background: #f9fafb !important;
-    color: #111 !important;
-    max-width: 800px;
-    margin: 3rem auto;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    padding: 2rem;
-  }
+#container svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-  .privacy-page h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .privacy-page h2 {
-    font-size: 1.3rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .privacy-page ul {
-    margin-left: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .privacy-page li {
-    margin-bottom: 0.5rem;
-  }
-
-  .privacy-page .btn-back {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background: #0066cc;
-    color: #fff;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.2s ease;
-  }
-
-  .privacy-page .btn-back:hover {
-    background: #004999;
-  }
-
-  /* Footer */
-  footer {
-    padding: 2rem;
-    text-align: center;
-    background: white;
-    border-top: 1px solid #ddd;
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  body.darkmode footer {
-    background: #1a1f3a;
-    border-color: #3a3f5a;
-    color: #999;
-  }
-
-  footer a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-  /* Map Label */
-  #map-label {
+/* Info Menu */
+#info-menu {
     position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: none;
-  }
-
-  body.darkmode #map-label {
-    background: #1a1f3a;
-  }
-
-  /* Info Menu */
-  #info-menu {
-    position: fixed;
-    right: -400px;
+    right: -420px;
     top: 0;
-    width: 380px;
+    width: 400px;
     height: 100vh;
     background: white;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    box-shadow: -2px 0 12px rgba(0,0,0,0.15);
     padding: 2rem;
     transition: right 0.3s ease;
     z-index: 101;
     overflow-y: auto;
-  }
+}
 
-  body.darkmode #info-menu {
+body.darkmode #info-menu {
     background: #1a1f3a;
-  }
+}
 
-  #info-menu.active {
+#info-menu.active {
     right: 0;
-  }
+}
 
-  .search-result {
+#info-menu h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+#info-menu h5 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#info-menu span {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+body.darkmode #info-menu span {
+    color: #999;
+}
+
+.search-result {
     padding: 1rem;
     background: #f9f9f9;
     border-radius: 8px;
     margin-bottom: 1rem;
     cursor: pointer;
     transition: background 0.2s;
-  }
+}
 
-  body.darkmode .search-result {
+body.darkmode .search-result {
     background: #2a2f4a;
-  }
+}
 
-  .search-result:hover {
+.search-result:hover {
     background: #e0e0e0;
-  }
+}
 
-  body.darkmode .search-result:hover {
+body.darkmode .search-result:hover {
     background: #3a3f5a;
-  }
+}
 
-  .search-result h4 {
+.search-result h4 {
     margin-bottom: 0.5rem;
-  }
+}
 
-  .search-result span {
-    color: #666;
+/* Map Label */
+#map-label {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    display: none;
+    align-items: center;
+    gap: 1rem;
+}
+
+body.darkmode #map-label {
+    background: #1a1f3a;
+}
+
+#map-label.active {
+    display: flex;
+}
+
+.map-icon {
+    width: 40px;
+    height: 40px;
+    background: #0066cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-icon::before {
+    content: "📍";
+    font-size: 1.5rem;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    border-top: 1px solid #ddd;
     font-size: 0.9rem;
-  }
+    color: #666;
+}
 
-  body.darkmode .search-result span {
+body.darkmode footer {
+    background: #1a1f3a;
+    border-color: #3a3f5a;
     color: #999;
-  }
+}
 
-  /* Responsive */
-  @media (max-width: 768px) {
+footer a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Cache */
+#cache {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
     header {
-      padding: 0.75rem 1rem;
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+    }
+
+    header input[type="text"] {
+        width: 100%;
+        order: 3;
+        margin-top: 0.5rem;
     }
 
     #nav-menu, #settings, #info-menu {
-      width: 100%;
-      left: -100%;
+        width: 90%;
+        max-width: 350px;
     }
 
-    #settings {
-      right: -100%;
+    #nav-menu {
+        left: -100%;
     }
 
-    #info-menu {
-      right: -100%;
+    #settings, #info-menu {
+        right: -100%;
     }
 
     #btn-settings {
-      right: 1rem;
-      width: 45px;
-      height: 45px;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
     }
-  }
+
+    #container {
+        height: calc(100vh - 120px);
+    }
+}
+
+/* Loading Spinner */
+.loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0,102,204,0.2);
+    border-radius: 50%;
+    border-top-color: #0066cc;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 </style>
 </head>
 
 <body class="darkmode">
 
 <header>
-  <div id="btn-menu" aria-label="Menu principal" role="button" tabindex="0">
-    <div></div><div></div><div></div>
-  </div>
-  <input type="text" name="search" placeholder="Rechercher une salle, une personne..." aria-label="Recherche"/>
-  <button aria-label="Lancer la recherche">Rechercher</button>
+    <div id="btn-menu">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <input type="text" name="search" placeholder="Rechercher une salle, une personne..." />
+    <button></button>
 </header>
 
-<div id="btn-settings" aria-label="Paramètres" role="button"></div>
+<div id="btn-settings"></div>
 
-<nav id="info-menu" aria-label="Informations salle">
-  <div>
-    <div></div>
+<nav id="info-menu">
     <div>
-      <h4>Nom de la salle</h4>
-      <span>Description de la salle</span>
-      <div>
         <div></div>
         <div>
-          <h5>Nom de la personne</h5>
-          <span>Description de la personne</span>
+            <h4>Nom de la salle</h4>
+            <span>Description de la salle</span>
+            <div>
+                <div></div>
+                <div>
+                    <h5>Nom de la personne</h5>
+                    <span>Description de la personne</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div>
-    <div id="search-result-template" class="search-result">
-      <h4>Résultat</h4>
-      <span>Description</span>
+    <div>
+        <div id="search-result-template" class="search-result">
+            <h4></h4>
+            <span></span>
+        </div>
     </div>
-  </div>
 </nav>
 
-<nav id="nav-menu" aria-label="Navigation campus">
-  <a href="#" class="btn-back" id="privacy-btn">← Vie Privée</a>
-  <ul>
-    <li><a href="#kb" class="menu-itm-campus" data-map="kb">🏫 Kremlin-Bicêtre</a></li>
-    <li><a href="#vj" class="menu-itm-campus" data-map="vj">🏫 Villejuif</a></li>
-    <li><a href="#lyon" class="menu-itm-campus" data-map="lyon">🏫 Lyon</a></li>
-    <li><a href="#toulouse" class="menu-itm-campus" data-map="toulouse">🏫 Toulouse</a></li>
-    <li><a href="#special" class="menu-itm-campus" data-map="special">⭐ SPÉCIALES</a></li>
-  </ul>
-  <div id="infooter">
-    <p>
-      Epita-Map.fr est un projet étudiant indépendant, non affilié à IONIS Education Group.<br/>
-      Maintainers : Nathan Chevalier & Mateo S.<br/>
-      Hébergé avec 💖 par Mateo S.<br/>
-      <a href="https://github.com/realone852147/epimap-secours" target="_blank">Contribuer sur GitHub</a>
-    </p>
-  </div>
+<nav id="nav-menu">
+    <ul>
+        <li><a href="#kb" class="menu-itm-campus" data-map="maps/kb.svg">🏫 Kremlin-Bicêtre</a>
+            <ul>
+                <li><a href="#voltaire" class="menu-itm-building">Voltaire</a>
+                    <ul>
+                        <li><a href="#kb-v-1" class="menu-itm-stage" data-map="maps/kb-voltaire-f-1.svg">Voltaire Sous-sol</a></li>
+                        <li><a href="#kb-v0" class="menu-itm-stage" data-map="maps/kb-voltaire-f0.svg">Voltaire RdC</a></li>
+                        <li><a href="#kb-v1" class="menu-itm-stage" data-map="maps/kb-voltaire-f1.svg">Voltaire 1er étage</a></li>
+                        <li><a href="#kb-v2" class="menu-itm-stage" data-map="maps/kb-voltaire-f2.svg">Voltaire 2ème étage</a></li>
+                        <li><a href="#kb-v3" class="menu-itm-stage" data-map="maps/kb-voltaire-f3.svg">Voltaire 3ème étage</a></li>
+                        <li><a href="#kb-v4" class="menu-itm-stage" data-map="maps/kb-voltaire-f4.svg">Voltaire 4ème étage</a></li>
+                        <li><a href="#kb-v5" class="menu-itm-stage" data-map="maps/kb-voltaire-f5.svg">Voltaire 5ème étage</a></li>
+                        <li><a href="#kb-v6" class="menu-itm-stage" data-map="maps/kb-voltaire-f6.svg">Voltaire 6ème étage</a></li>
+                    </ul>
+                </li>
+                <li><a href="#paritalie" class="menu-itm-building">Paritalie</a>
+                    <ul>
+                        <li><a href="#kb-p0" class="menu-itm-stage" data-map="maps/kb-paritalie-f0.svg">Paritalie RdC</a></li>
+                        <li><a href="#kb-p1" class="menu-itm-stage" data-map="maps/kb-paritalie-f1.svg">Paritalie 1er étage</a></li>
+                        <li><a href="#kb-p2" class="menu-itm-stage" data-map="maps/kb-paritalie-f2.svg">Paritalie 2ème étage</a></li>
+                        <li><a href="#kb-p3" class="menu-itm-stage" data-map="maps/kb-paritalie-f3.svg">Paritalie 3ème étage</a></li>
+                        <li><a href="#kb-p4" class="menu-itm-stage" data-map="maps/kb-paritalie-f4.svg">Paritalie 4ème étage</a></li>
+                        <li><a href="#kb-p5" class="menu-itm-stage" data-map="maps/kb-paritalie-f5.svg">Paritalie 5ème étage</a></li>
+                    </ul>
+                </li>
+                <li><a href="#pasteur" class="menu-itm-building">Pasteur</a>
+                    <ul>
+                        <li><a href="#kb-pa-2" class="menu-itm-stage" data-map="maps/kb-pasteur-f-2.svg">Pasteur -2 (Under)</a></li>
+                        <li><a href="#kb-pa-1" class="menu-itm-stage" data-map="maps/kb-pasteur-f-1.svg">Pasteur -1 (Inter-sol)</a></li>
+                        <li><a href="#kb-pa0" class="menu-itm-stage" data-map="maps/kb-pasteur-f0.svg">Pasteur RdC</a></li>
+                        <li><a href="#kb-pa1" class="menu-itm-stage" data-map="maps/kb-pasteur-f1.svg">Pasteur 1er étage</a></li>
+                        <li><a href="#kb-pa2" class="menu-itm-stage" data-map="maps/kb-pasteur-f2.svg">Pasteur 2ème étage</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><a href="#vj" class="menu-itm-campus" data-map="maps/vj.svg">🏫 Villejuif</a>
+            <ul>
+                <li><a href="#va" class="menu-itm-building">VA</a>
+                    <ul>
+                        <li><a href="#vj-va-1" class="menu-itm-stage" data-map="maps/vj-va-f-1.svg">VA Sous-sol</a></li>
+                        <li><a href="#vj-va0" class="menu-itm-stage" data-map="maps/vj-va-f0.svg">VA RdC</a></li>
+                        <li><a href="#vj-va1" class="menu-itm-stage" data-map="maps/vj-va-f1.svg">VA 1er étage</a></li>
+                        <li><a href="#vj-va2" class="menu-itm-stage" data-map="maps/vj-va-f2.svg">VA 2ème étage</a></li>
+                        <li><a href="#vj-va3" class="menu-itm-stage" data-map="maps/vj-va-f3.svg">VA 3ème étage</a></li>
+                    </ul>
+                </li>
+                <li><a href="#vb" class="menu-itm-building">VB</a>
+                    <ul>
+                        <li><a href="#vj-vb0" class="menu-itm-stage">VB 0 (Bientôt)</a></li>
+                        <li><a href="#vj-vb1" class="menu-itm-stage">VB 1 (Bientôt)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#vjc" class="menu-itm-building">VJC</a>
+                    <ul>
+                        <li><a href="#vj-vjc0b" class="menu-itm-stage" data-map="maps/vj-vjc-f0b.svg">VJC RdC Bas</a></li>
+                        <li><a href="#vj-vjc0h" class="menu-itm-stage" data-map="maps/vj-vjc-f0h.svg">VJC RdC Haut</a></li>
+                        <li><a href="#vj-vjc1" class="menu-itm-stage" data-map="maps/vj-vjc-f1.svg">VJC 1er étage</a></li>
+                        <li><a href="#vj-vjc2" class="menu-itm-stage" data-map="maps/vj-vjc-f2.svg">VJC 2ème étage</a></li>
+                        <li><a href="#vj-vjc3" class="menu-itm-stage" data-map="maps/vj-vjc-f3.svg">VJC 3ème étage</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><a href="#lyon" class="menu-itm-campus">🏫 Lyon</a>
+            <ul>
+                <li><a href="#lyon1" class="menu-itm-building">Lyon (Bientôt)</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#toulouse" class="menu-itm-campus">🏫 Toulouse</a>
+            <ul>
+                <li><a href="#tlse" class="menu-itm-building">Toulouse (Bientôt)</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#special" class="menu-itm-campus">⭐ SPÉCIALES</a>
+            <ul>
+                <li><a href="#events" class="menu-itm-building">Événements</a>
+                    <ul>
+                        <li><a href="#prologin2025" class="menu-itm-stage" data-map="maps/others-prologin-f2025.svg">Finale Prologin 2025</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <div id="infooter">
+            Epita-Map.fr is not affiliated with IONIS Education Group<br />
+            Maintainer 1 : nathan.chevalier@epita.fr<br />
+            Maintainer 2 : mateo.schwab@epita.fr<br />
+            Hosted with 💖 by Mateo S.<br />
+            Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub Epita-Map</a><br />
+        </div>
+    </ul>
 </nav>
 
-<section id="settings" aria-label="Paramètres">
-  <h3>Paramètres</h3>
-  <div class="setting">
-    <span>Mode Sombre</span>
-    <div class="onoffswitch">
-      <input type="checkbox" name="darkmodeSwitch" class="onoffswitch-checkbox" id="darkmodeSwitch" tabindex="0" checked>
-      <label class="onoffswitch-label" for="darkmodeSwitch"></label>
+<section id="settings">
+    <h3>Paramètres</h3>
+    <div class="setting">
+        <span>Mode Sombre</span>
+        <div class="onoffswitch">
+            <input type="checkbox" name="darkmodeSwitch" class="onoffswitch-checkbox" id="darkmodeSwitch" tabindex="0" checked>
+            <label class="onoffswitch-label" for="darkmodeSwitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
     </div>
-  </div>
-  <div class="setting">
-    <span>Enrichir l'affichage</span>
-    <div class="onoffswitch">
-      <input type="checkbox" name="enrichedSwitch" class="onoffswitch-checkbox" id="enrichedSwitch" tabindex="0">
-      <label class="onoffswitch-label" for="enrichedSwitch"></label>
+    <div class="setting">
+        <span>Enrichir l'affichage</span>
+        <div class="onoffswitch">
+            <input type="checkbox" name="enrichedSwitch" class="onoffswitch-checkbox" id="enrichedSwitch" tabindex="0">
+            <label class="onoffswitch-label" for="enrichedSwitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
     </div>
-  </div>
-  <div class="setting">
-    <span>Langue</span>
-    <select aria-label="Langue">
-      <option value="fr">🇫🇷 FR</option>
-      <option value="en">🇬🇧 EN</option>
-    </select>
-  </div>
+    <div class="setting">
+        <span>Langue</span>
+        <select>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+    <span>
+        Maintainer 1 : nathan.chevalier@epita.fr<br />
+        Maintainer 2 : mateo.schwab@epita.fr<br />
+        Hosted with 💖 by Mateo S.<br />
+        Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub</a>
+    </span>
 </section>
 
-<section id="container" contenturl="maps/kb.svg">
-  <div style="text-align: center; color: #666;">
-    <h2>Bienvenue sur Epita-Map</h2>
-    <p>Sélectionnez un campus dans le menu pour afficher le plan</p>
-  </div>
+<section id="cache"><div></div></section>
+
+<section id="container" class="darkmap" contenturl="maps/kb.svg">
+    <div style="text-align: center; padding: 2rem;">
+        <div class="loading"></div>
+        <p style="margin-top: 1rem;">Chargement de la carte...</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Sélectionnez un étage dans le menu</p>
+    </div>
 </section>
 
-<section id="map-label" aria-label="Étiquette carte">
-  <div class="map-icon"></div>
-  <div><div>Information</div></div>
+<section id="map-label">
+    <div class="map-icon"></div>
+    <div>
+        <div>Information</div>
+    </div>
 </section>
 
 <footer>
-  <p>
-    Epita-Map.fr — Projet étudiant indépendant.<br/>
-    Maintainers : Nathan Chevalier & Mateo S.<br/>
-    Hébergé par Mateo S. 💖<br/>
-    <a href="https://github.com/realone852147/epimap-secours" target="_blank">Contribuer sur GitHub</a><br/>
-    <a href="#privacy" id="footer-privacy-link">Politique de confidentialité</a> | 
-    <a href="#mentions" id="footer-mentions-link">Mentions légales</a>
-  </p>
+    <div class="log-box" style="display: none"><div>X</div></div>
 </footer>
 
 <script>
+// Main Application
 document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
-  const btnMenu = document.getElementById("btn-menu");
-  const btnSettings = document.getElementById("btn-settings");
-  const navMenu = document.getElementById("nav-menu");
-  const settings = document.getElementById("settings");
-  const container = document.getElementById("container");
-  const darkmodeSwitch = document.getElementById("darkmodeSwitch");
-  const privacyBtn = document.getElementById("privacy-btn");
-  const footerPrivacyLink = document.getElementById("footer-privacy-link");
+    const body = document.body;
+    const btnMenu = document.getElementById("btn-menu");
+    const btnSettings = document.getElementById("btn-settings");
+    const navMenu = document.getElementById("nav-menu");
+    const settings = document.getElementById("settings");
+    const infoMenu = document.getElementById("info-menu");
+    const container = document.getElementById("container");
+    const darkmodeSwitch = document.getElementById("darkmodeSwitch");
+    const enrichedSwitch = document.getElementById("enrichedSwitch");
+    const searchInput = document.querySelector('input[name="search"]');
+    const searchBtn = document.querySelector('header button');
 
-  // Toggle Menu
-  btnMenu.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-    settings.classList.remove("active");
-  });
-
-  // Toggle Settings
-  btnSettings.addEventListener("click", () => {
-    settings.classList.toggle("active");
-    navMenu.classList.remove("active");
-  });
-
-  // Dark Mode Toggle
-  darkmodeSwitch.addEventListener("change", () => {
-    body.classList.toggle("darkmode");
-  });
-
-  // Privacy Page HTML
-  const privacyHTML = `
-    <main class="privacy-page">
-      <h1>Politique de confidentialité — Epita-Map</h1>
-      <p><strong>Epita-Map</strong> ne collecte, ne stocke et ne partage aucune donnée personnelle.</p>
-
-      <h2>1. Données collectées</h2>
-      <ul>
-        <li>Aucune géolocalisation automatique.</li>
-        <li>Aucun compte utilisateur, aucun cookie de suivi.</li>
-        <li>Les adresses IP ne sont pas visibles par le serveur (tout le trafic passe via Cloudflare).</li>
-      </ul>
-
-      <h2>2. Sécurité</h2>
-      <p>Le site est protégé par Cloudflare (HTTPS, anti-DDoS). Les logs sont purement techniques, anonymes et temporaires.</p>
-      <p>Le trafic passe via Cloudflare pour des raisons de sécurité : <a href="https://www.cloudflare.com/fr-fr/privacypolicy/" target="_blank">Politique Cloudflare</a>.</p>
-
-      <h2>3. Conservation</h2>
-      <p>Aucune donnée n'est conservée de manière persistante. Le serveur est réinitialisé automatiquement pour garantir qu'aucune trace n'est gardée.</p>
-
-      <h2>4. Mentions légales</h2>
-      <p>Responsable du site : Nathan Chevalier & Mateo S.<br/>
-      Email : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a>, 
-      <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br/>
-      Hébergeur : [Nom hébergeur], [Adresse]<br/>
-      Finalité : Mise à disposition interactive des plans des campus Epita.</p>
-
-      <h2>5. Contact</h2>
-      <p>Pour toute question : <a href="mailto:contact@epita-map.fr">contact@epita-map.fr</a></p>
-
-      <a href="#" id="btn-return" class="btn-back">← Retourner sur la carte</a>
-    </main>
-  `;
-
-  // Show Privacy Page
-  function showPrivacy(e) {
-    e.preventDefault();
-    document.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
-      .forEach(el => el.style.display = "none");
-    container.innerHTML = privacyHTML;
-    container.style.height = "auto";
-  }
-
-  privacyBtn.addEventListener("click", showPrivacy);
-  footerPrivacyLink.addEventListener("click", showPrivacy);
-
-  // Return from Privacy
-  document.body.addEventListener("click", (e) => {
-    if (e.target && e.target.id === "btn-return") {
-      e.preventDefault();
-      container.innerHTML = `
-        <div style="text-align: center; color: #666;">
-          <h2>Bienvenue sur Epita-Map</h2>
-          <p>Sélectionnez un campus dans le menu pour afficher le plan</p>
-        </div>
-      `;
-      container.style.height = "80vh";
-      document.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
-        .forEach(el => el.style.display = "");
-    }
-  });
-
-  // Close menus on outside click
-  document.addEventListener("click", (e) => {
-    if (!navMenu.contains(e.target) && !btnMenu.contains(e.target)) {
-      navMenu.classList.remove("active");
-    }
-    if (!settings.contains(e.target) && !btnSettings.contains(e.target)) {
-      settings.classList.remove("active");
-    }
-  });
-
-  // Campus selection (placeholder - you'll need to load actual SVG maps)
-  document.querySelectorAll(".menu-itm-campus").forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const campus = e.target.dataset.map;
-      container.innerHTML = `
-        <div style="text-align: center; color: #666;">
-          <h2>Plan du campus ${e.target.textContent}</h2>
-          <p>Chargement en cours...</p>
-          <p style="font-size: 0.9rem; margin-top: 1rem;">
-            (Connectez vos fichiers SVG maps/${campus}.svg pour afficher le plan)
-          </p>
-        </div>
-      `;
-      navMenu.classList.remove("active");
+    // Toggle Menu
+    btnMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        settings.classList.remove("active");
+        infoMenu.classList.remove("active");
     });
-  });
+
+    // Toggle Settings
+    btnSettings.addEventListener("click", () => {
+        settings.classList.toggle("active");
+        navMenu.classList.remove("active");
+        infoMenu.classList.remove("active");
+    });
+
+    // Dark Mode Toggle
+    darkmodeSwitch.addEventListener("change", () => {
+        body.classList.toggle("darkmode");
+        container.classList.toggle("darkmap");
+        localStorage.setItem('darkmode', body.classList.contains('darkmode'));
+    });
+
+    // Load Dark Mode Preference
+    const savedDarkMode = localStorage.getItem('darkmode');
+    if (savedDarkMode === 'false') {
+        body.classList.remove('darkmode');
+        container.classList.remove('darkmap');
+        darkmodeSwitch.checked = false;
+    }
+
+    // Enriched Display Toggle
+    enrichedSwitch.addEventListener("change", () => {
+        const enriched = enrichedSwitch.checked;
+        localStorage.setItem('enriched', enriched);
+        console.log('Enriched display:', enriched);
+    });
+
+    // Load SVG Map
+    async function loadMap(mapUrl) {
+        if (!mapUrl) return;
+        
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <div class="loading"></div>
+                <p style="margin-top: 1rem;">Chargement de ${mapUrl}...</p>
+            </div>
+        `;
+
+        try {
+            const response = await fetch(mapUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const svgText = await response.text();
+            container.innerHTML = svgText;
+            
+            // Add interactivity to SVG elements
+            const svg = container.querySelector('svg');
+            if (svg) {
+                svg.style.width = '100%';
+                svg.style.height = '100%';
+                svg.style.maxWidth = '100%';
+                svg.style.maxHeight = '100%';
+                
+                // Make SVG interactive
+                const rooms = svg.querySelectorAll('[id*="room"], [class*="room"], rect, path, polygon');
+                rooms.forEach(room => {
+                    room.style.cursor = 'pointer';
+                    room.addEventListener('click', (e) => {
+                        const roomId = e.target.id || e.target.getAttribute('data-room');
+                        if (roomId) {
+                            showRoomInfo(roomId, e.target);
+                        }
+                    });
+                    
+                    room.addEventListener('mouseenter', (e) => {
+                        e.target.style.opacity = '0.7';
+                        e.target.style.transition = 'opacity 0.2s';
+                    });
+                    
+                    room.addEventListener('mouseleave', (e) => {
+                        e.target.style.opacity = '1';
+                    });
+                });
+            }
+        } catch (error) {
+            console.error('Error loading map:', error);
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #d32f2f;">
+                    <h3>❌ Erreur de chargement</h3>
+                    <p style="margin-top: 1rem;">Impossible de charger la carte: ${mapUrl}</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">
+                        ${error.message}
+                    </p>
+                    <p style="font-size: 0.85rem; margin-top: 1rem; color: #999;">
+                        Assurez-vous que le fichier SVG existe dans le dossier maps/
+                    </p>
+                </div>
+            `;
+        }
+    }
+
+    // Show Room Information
+    function showRoomInfo(roomId, element) {
+        const roomName = roomId || 'Salle inconnue';
+        const roomDesc = element.getAttribute('data-description') || 'Aucune description disponible';
+        
+        infoMenu.querySelector('h4').textContent = roomName;
+        infoMenu.querySelector('span').textContent = roomDesc;
+        
+        infoMenu.classList.add('active');
+        navMenu.classList.remove('active');
+        settings.classList.remove('active');
+        
+        // Highlight selected room
+        document.querySelectorAll('svg [style*="stroke"]').forEach(el => {
+            el.style.stroke = '';
+            el.style.strokeWidth = '';
+        });
+        element.style.stroke = '#0066cc';
+        element.style.strokeWidth = '3';
+    }
+
+    // Handle Map Navigation
+    document.querySelectorAll('.menu-itm-stage, .menu-itm-campus').forEach(link => {
+        link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const mapUrl = link.getAttribute('data-map');
+            if (mapUrl) {
+                await loadMap(mapUrl);
+                navMenu.classList.remove('active');
+                
+                // Update URL hash
+                window.location.hash = link.getAttribute('href');
+            }
+        });
+    });
+
+    // Building links (accordion behavior)
+    document.querySelectorAll('.menu-itm-building').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const ul = link.nextElementSibling;
+            if (ul && ul.tagName === 'UL') {
+                ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
+
+    // Search Functionality
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) return;
+
+        const results = [];
+        document.querySelectorAll('.menu-itm-stage').forEach(link => {
+            const text = link.textContent.toLowerCase();
+            if (text.includes(query)) {
+                results.push({
+                    name: link.textContent,
+                    map: link.getAttribute('data-map'),
+                    link: link
+                });
+            }
+        });
+
+        if (results.length > 0) {
+            displaySearchResults(results);
+        } else {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3>🔍 Aucun résultat</h3>
+                    <p style="margin-top: 1rem;">Aucune salle trouvée pour "${query}"</p>
+                </div>
+            `;
+        }
+    }
+
+    function displaySearchResults(results) {
+        infoMenu.innerHTML = `
+            <h3 style="margin-bottom: 1.5rem;">Résultats de recherche (${results.length})</h3>
+        `;
+        
+        results.forEach(result => {
+            const div = document.createElement('div');
+            div.className = 'search-result';
+            div.innerHTML = `
+                <h4>${result.name}</h4>
+                <span>Cliquez pour afficher</span>
+            `;
+            div.addEventListener('click', async () => {
+                if (result.map) {
+                    await loadMap(result.map);
+                    infoMenu.classList.remove('active');
+                }
+            });
+            infoMenu.appendChild(div);
+        });
+        
+        infoMenu.classList.add('active');
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    // Close menus on outside click
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !btnMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+        }
+        if (!settings.contains(e.target) && !btnSettings.contains(e.target)) {
+            settings.classList.remove('active');
+        }
+        if (!infoMenu.contains(e.target) && 
+            !searchBtn.contains(e.target) && 
+            !searchInput.contains(e.target)) {
+            // Don't close info menu on outside click if it has content
+        }
+    });
+
+    // Close menus on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            navMenu.classList.remove('active');
+            settings.classList.remove('active');
+            infoMenu.classList.remove('active');
+        }
+    });
+
+    // Load initial map if hash present
+    if (window.location.hash) {
+        const link = document.querySelector(`a[href="${window.location.hash}"]`);
+        if (link) {
+            const mapUrl = link.getAttribute('data-map');
+            if (mapUrl) {
+                loadMap(mapUrl);
+            }
+        }
+    } else {
+        // Load default map
+        const defaultMap = container.getAttribute('contenturl');
+        if (defaultMap) {
+            loadMap(defaultMap);
+        }
+    }
+
+    // Initialize building submenus as collapsed
+    document.querySelectorAll('.menu-itm-building + ul').forEach(ul => {
+        ul.style.display = 'none';
+    });
+
+    console.log('✅ Epita-Map initialized successfully');
 });
 </script>
 
