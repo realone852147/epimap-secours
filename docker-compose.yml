@@ -1,7 +1,0 @@
-services:
-  www:
-    image: httpd:2.4
-    ports:
-      - 8000:80
-    volumes:
-        - ./src:/usr/local/apache2/htdocs/:z
