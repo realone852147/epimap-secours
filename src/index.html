@@ -546,6 +546,95 @@ footer a:hover {
     display: none;
 }
 
+/* Legal Pages */
+.legal-page {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: white !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    color: #111 !important;
+}
+
+.legal-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #0066cc;
+}
+
+.legal-page h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.legal-page p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.legal-page ul {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.legal-page li {
+    margin-bottom: 0.5rem;
+    color: #111;
+}
+
+.legal-page a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.legal-page a:hover {
+    text-decoration: underline;
+}
+
+.legal-page .info-box {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #e8f4fd;
+    border-left: 4px solid #0066cc;
+    border-radius: 4px;
+}
+
+.legal-page .warning-box {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    border-radius: 4px;
+}
+
+.legal-page .btn-back {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background: #0066cc;
+    color: white !important;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.legal-page .btn-back:hover {
+    background: #0052a3;
+}
+
+.legal-page em {
+    color: #666;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     header {
@@ -580,6 +669,19 @@ footer a:hover {
 
     #container {
         height: calc(100vh - 120px);
+    }
+
+    .legal-page {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .legal-page h1 {
+        font-size: 1.5rem;
+    }
+
+    .legal-page h2 {
+        font-size: 1.2rem;
     }
 }
 
@@ -638,6 +740,10 @@ footer a:hover {
 </nav>
 
 <nav id="nav-menu">
+    <div style="padding: 1rem; margin-bottom: 1rem; background: rgba(0,102,204,0.1); border-radius: 8px; font-size: 0.85rem;">
+        <strong>ℹ️ Navigation</strong><br>
+        Cliquez sur un campus puis sur un étage pour afficher le plan
+    </div>
     <ul>
         <li><a href="#kb" class="menu-itm-campus" data-map="maps/kb.svg">🏫 Kremlin-Bicêtre</a>
             <ul>
@@ -727,11 +833,18 @@ footer a:hover {
         </li>
 
         <div id="infooter">
-            Epita-Map.fr is not affiliated with IONIS Education Group<br />
-            Maintainer 1 : nathan.chevalier@epita.fr<br />
-            Maintainer 2 : mateo.schwab@epita.fr<br />
-            Hosted with 💖 by Mateo S.<br />
-            Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub Epita-Map</a><br />
+            <strong>⚖️ Informations légales</strong><br><br>
+            📧 Responsable : <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br>
+            💻 Développeur : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a><br><br>
+            
+            <a href="#" id="privacy-link" style="color: #0066cc; text-decoration: underline;">📄 Politique de confidentialité</a> | 
+            <a href="#" id="mentions-link" style="color: #0066cc; text-decoration: underline;">⚖️ Mentions légales</a><br><br>
+            
+            ⚠️ <strong>Projet étudiant indépendant</strong>, non affilié à IONIS Education Group.<br>
+            Les plans sont fournis à titre indicatif et peuvent contenir des erreurs.<br><br>
+            
+            Hosted with 💖 by Mateo S.<br>
+            Contribute on <a href="https://github.com/realone852147/epimap-secours" target="_blank">GitHub Epita-Map</a>
         </div>
     </ul>
 </nav>
@@ -766,10 +879,16 @@ footer a:hover {
         </select>
     </div>
     <span>
-        Maintainer 1 : nathan.chevalier@epita.fr<br />
-        Maintainer 2 : mateo.schwab@epita.fr<br />
+        <strong>📧 Contact</strong><br>
+        Responsable : mateo.schwab@epita.fr<br />
+        Développeur : nathan.chevalier@epita.fr<br /><br />
+        
+        <strong>🔒 Confidentialité</strong><br>
+        Ce site ne collecte aucune donnée personnelle.<br>
+        <a href="#" id="settings-privacy-link">Voir la politique complète</a><br><br>
+        
         Hosted with 💖 by Mateo S.<br />
-        Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub</a>
+        <a href="https://github.com/realone852147/epimap-secours" target="_blank">Contribute on GitHub</a>
     </span>
 </section>
 
@@ -791,6 +910,13 @@ footer a:hover {
 </section>
 
 <footer>
+    <p style="line-height: 1.8;">
+        <strong>Epita-Map.fr</strong> — Projet étudiant indépendant, non affilié à IONIS Education Group<br>
+        <a href="#" id="footer-privacy-link">📄 Politique de confidentialité</a> | 
+        <a href="#" id="footer-mentions-link">⚖️ Mentions légales</a> | 
+        <a href="https://github.com/realone852147/epimap-secours" target="_blank">💻 GitHub</a><br>
+        Responsable: Mateo S. | Epimap Dev. : Nathan C. | Hosted with 💖
+    </p>
     <div class="log-box" style="display: none"><div>X</div></div>
 </footer>
 
@@ -848,6 +974,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load SVG Map
     async function loadMap(mapUrl) {
         if (!mapUrl) return;
+        
+        // Store function globally for legal page return
+        window.loadMapFunction = loadMap;
         
         container.innerHTML = `
             <div style="text-align: center; padding: 2rem;">
@@ -1079,6 +1208,211 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     console.log('✅ Epita-Map initialized successfully');
+});
+
+// Legal Pages Content
+const legalPages = {
+    privacy: `
+        <div class="legal-page">
+            <h1>📄 Politique de confidentialité</h1>
+            
+            <div class="info-box">
+                <p style="font-size: 1.1rem; margin: 0;">
+                    <strong>Epita-Map.fr</strong> ne collecte, ne stocke et ne partage <strong>aucune donnée personnelle</strong>.
+                </p>
+            </div>
+
+            <h2>1. 🔍 Données collectées</h2>
+            <ul>
+                <li><strong>Aucune géolocalisation</strong> automatique ou manuelle n'est effectuée</li>
+                <li><strong>Aucun compte utilisateur</strong> n'est requis pour utiliser le service</li>
+                <li><strong>Aucun cookie de suivi</strong> ou de traçage n'est utilisé</li>
+                <li><strong>Aucune analyse comportementale</strong> (pas de Google Analytics, Facebook Pixel, etc.)</li>
+                <li>Les <strong>adresses IP ne sont pas visibles</strong> par notre serveur (tout le trafic passe via Cloudflare)</li>
+            </ul>
+
+            <h2>2. 🛡️ Sécurité et infrastructure</h2>
+            <p>Le site est protégé par <strong>Cloudflare</strong> qui assure :</p>
+            <ul>
+                <li>Chiffrement HTTPS pour toutes les communications</li>
+                <li>Protection anti-DDoS</li>
+                <li>Cache de contenu pour améliorer les performances</li>
+            </ul>
+            <div class="warning-box">
+                <p style="margin: 0;">
+                    ⚠️ <strong>Note importante :</strong> Le trafic passe via Cloudflare pour des raisons de sécurité. 
+                    Ce service peut traiter les adresses IP conformément à sa propre politique de confidentialité 
+                    accessible sur <a href="https://www.cloudflare.com/fr-fr/privacypolicy/" target="_blank">cloudflare.com/privacypolicy</a>.
+                </p>
+            </div>
+
+            <h2>3. 💾 Conservation des données</h2>
+            <p><strong>Aucune donnée n'est conservée de manière persistante.</strong> Les seuls logs techniques générés sont :</p>
+            <ul>
+                <li>Anonymes (aucune IP visible)</li>
+                <li>Temporaires (rétention de quelques jours maximum)</li>
+                <li>Utilisés uniquement pour diagnostiquer les problèmes techniques</li>
+            </ul>
+
+            <h2>4. 🍪 Cookies et stockage local</h2>
+            <p>Le site utilise uniquement le <strong>localStorage</strong> de votre navigateur pour sauvegarder vos préférences locales :</p>
+            <ul>
+                <li>Mode sombre activé/désactivé</li>
+                <li>Préférence d'affichage enrichi</li>
+            </ul>
+            <p><em>Ces données restent sur votre appareil et ne sont jamais transmises à nos serveurs.</em></p>
+
+            <h2>5. 🔗 Liens externes</h2>
+            <p>Ce site peut contenir des liens vers des sites externes (GitHub, Cloudflare). Nous ne sommes pas responsables de leurs politiques de confidentialité.</p>
+
+            <h2>6. ✉️ Contact</h2>
+            <p>
+                Pour toute question concernant cette politique de confidentialité :<br>
+                📧 Responsable : <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br>
+                📧 Epimap Dev. : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a>
+            </p>
+
+            <p><em>Dernière mise à jour : Octobre 2024</em></p>
+
+            <button class="btn-back" id="close-legal">← Retour à la carte</button>
+        </div>
+    `,
+    
+    mentions: `
+        <div class="legal-page">
+            <h1>⚖️ Mentions légales</h1>
+
+            <h2>1. 📝 Éditeur du site</h2>
+            <p>
+                <strong>Nom du site :</strong> Epita-Map.fr<br>
+                <strong>Nature :</strong> Projet étudiant bénévole<br>
+                <strong>Responsable de publication :</strong> Mateo Schwab<br>
+                <strong>Contact :</strong> <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br>
+                <strong>Développeur :</strong> Nathan Chevalier (source du code)<br>
+                <strong>Contact développeur :</strong> <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a>
+            </p>
+
+            <h2>2. 🖥️ Hébergement</h2>
+            <p>
+                <strong>Hébergeur :</strong> Proxmox Local (Serveur privé)<br>
+                <strong>Adresse :</strong> Non communiquée (hébergement privé)<br>
+                <strong>Protection CDN :</strong> Cloudflare, Inc.<br>
+                101 Townsend St, San Francisco, CA 94107, USA<br>
+                <a href="https://www.cloudflare.com" target="_blank">www.cloudflare.com</a>
+            </p>
+
+            <h2>3. 🎯 Objet du site</h2>
+            <p>
+                Epita-Map.fr a pour objectif de fournir aux étudiants et visiteurs de l'EPITA un accès 
+                simplifié aux plans des différents campus de l'école. Ce projet est <strong>indépendant</strong> 
+                et <strong>non affilié</strong> à IONIS Education Group ou à l'EPITA.
+            </p>
+
+            <h2>4. 📜 Propriété intellectuelle</h2>
+            <div class="warning-box">
+                <p style="margin: 0;">
+                    ⚠️ <strong>Disclaimer important :</strong><br>
+                    • Les plans de campus appartiennent à l'EPITA / IONIS Education Group<br>
+                    • Ce site est un projet étudiant utilisant ces plans à des fins <strong>éducatives et pratiques</strong><br>
+                    • Aucune utilisation commerciale n'est faite de ces contenus<br>
+                    • Si vous représentez l'EPITA et souhaitez le retrait de contenus, contactez-nous immédiatement
+                </p>
+            </div>
+            <p>
+                Le code source du site est disponible sous licence open-source sur 
+                <a href="https://github.com/realone852147/epimap-secours" target="_blank">GitHub</a>.
+            </p>
+
+            <h2>5. ⚠️ Limitation de responsabilité</h2>
+            <p>Les plans et informations fournis le sont <strong>à titre indicatif</strong>. Nous ne garantissons pas :</p>
+            <ul>
+                <li>L'exactitude totale des plans (des modifications de campus peuvent survenir)</li>
+                <li>La disponibilité permanente du service</li>
+                <li>L'absence d'erreurs ou d'interruptions</li>
+            </ul>
+            <p>Les utilisateurs sont invités à vérifier les informations en cas de doute.</p>
+
+            <h2>6. 📞 Contact</h2>
+            <p>
+                Pour toute question, suggestion ou demande concernant le site :<br>
+                📧 Responsable : <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br>
+                📧 Epimap Dev. : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a><br>
+                💻 <a href="https://github.com/realone852147/epimap-secours" target="_blank">GitHub - Epita-Map</a>
+            </p>
+
+            <h2>7. 🇫🇷 Droit applicable</h2>
+            <p>
+                Les présentes mentions légales sont soumises au droit français. 
+                En cas de litige, les tribunaux français seront seuls compétents.
+            </p>
+
+            <p><em>Dernière mise à jour : Octobre 2024</em></p>
+
+            <button class="btn-back" id="close-legal">← Retour à la carte</button>
+        </div>
+    `
+};
+
+// Show Legal Pages
+function showLegalPage(type) {
+    const container = document.getElementById('container');
+    const elements = document.querySelectorAll('header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer');
+    
+    // Hide all elements
+    elements.forEach(el => el.style.display = 'none');
+    
+    // Show legal content
+    container.innerHTML = legalPages[type];
+    container.style.background = '#f5f5f5';
+    container.style.padding = '0';
+    container.style.overflow = 'auto';
+    
+    // Add close button handler
+    document.getElementById('close-legal').addEventListener('click', () => {
+        elements.forEach(el => el.style.display = '');
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <div class="loading"></div>
+                <p style="margin-top: 1rem;">Chargement de la carte...</p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Sélectionnez un étage dans le menu</p>
+            </div>
+        `;
+        container.style.background = '';
+        container.style.padding = '';
+        
+        // Reload default map
+        const defaultMap = 'maps/kb.svg';
+        const loadMapFunc = window.loadMapFunction;
+        if (loadMapFunc) {
+            loadMapFunc(defaultMap);
+        }
+    });
+}
+
+// Add event listeners for legal links
+document.addEventListener('DOMContentLoaded', () => {
+    const privacyLinks = ['privacy-link', 'settings-privacy-link', 'footer-privacy-link'];
+    const mentionsLinks = ['mentions-link', 'footer-mentions-link'];
+    
+    privacyLinks.forEach(id => {
+        const link = document.getElementById(id);
+        if (link) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLegalPage('privacy');
+            });
+        }
+    });
+    
+    mentionsLinks.forEach(id => {
+        const link = document.getElementById(id);
+        if (link) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLegalPage('mentions');
+            });
+        }
+    });
 });
 </script>
 
