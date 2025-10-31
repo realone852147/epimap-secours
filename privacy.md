@@ -1,6 +1,6 @@
 # Politique de confidentialité — Epita-Map
 
-**Dernière mise à jour :** YYYY-MM-DD
+**Dernière mise à jour :** 2025-10-31
 
 ## 1. Présentation générale
 Epita-Map est un outil open-source conçu pour aider les étudiants à retrouver facilement les salles et bâtiments du campus.  
