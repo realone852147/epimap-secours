@@ -11,7 +11,10 @@ Maps are based on a previous work of Ivan « Colona » Delalande (map.epita.eu) 
 [<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=2b9348">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
 <br />
+## Privacy
 
+For details about our security, data protection, and sustainability practices, please refer to our [Privacy Policy](./privacy.md).
+<br /> 
 ## Documentation
 
 You can find the full documentation [here](./docs/README.md). 
