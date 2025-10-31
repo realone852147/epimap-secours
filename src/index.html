@@ -13,7 +13,45 @@
     <link rel="stylesheet" href="css/onoffswitch.css" />
     <link rel="stylesheet" href="css/settings.css" />
     <link rel="stylesheet" href="css/darkmode.css" />
+    <style>
+        /* Style du texte de la politique de confidentialité */
+        #privacy {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2rem;
+            color: #111;
+        }
+        #privacy h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        #privacy h2 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+        }
+        #privacy ul {
+            margin-left: 1.2rem;
+        }
+        #privacy .btn-back {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: #0066cc;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        #privacy .btn-back:hover {
+            background: #004999;
+        }
+    </style>
 </head>
+
 <body class="darkmode">
 
 <header>
@@ -52,7 +90,7 @@
 </nav>
 
 <nav id="nav-menu">
-    <a href="https://epita-map.fr/privacy" class="btn-back">← Informations Vie Privée</a>
+    <a href="https://epita-map.fr/privacy" class="btn-back" id="privacy-btn">← Informations Vie Privée</a>
     <ul>
         <li><a href="maps/kb.svg" class="menu-itm-campus">Kremlin-Bicêtre</a>
             <ul>
@@ -157,11 +195,10 @@
             </ul>
         </li>
 
-        <li><a href="#" class="menu-itm-campus">SPECIALES</a>
+        <li><a href="#" class="menu-itm-campus">SPÉCIALES</a>
             <ul>
-                <li><a href="#" class="menu-itm-building">Evènements</a>
+                <li><a href="#" class="menu-itm-building">Évènements</a>
                     <ul>
-
                         <li><a href="maps/others-prologin-f2025.svg" class="menu-itm-stage">Finale Prologin 2025</a></li>
                     </ul>
                 </li>
@@ -173,7 +210,6 @@
             Maintainer 1 : nathan.chevalier@epita.fr<br />
             Maintainer 2 : mateo.schwab@epita.fr<br />
             Hosted with 💖 by Mateo S. <br />
-
             Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub Epita-Map</a><br />
         </div>
     </ul>
@@ -235,6 +271,57 @@
 <script src="js/maps.js"></script>
 <script src="js/search.js"></script>
 <script src="js/darkmode.js"></script>
+
+<!-- === Gestion dynamique de la page de vie privée === -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("container");
+  const privacyBtn = document.getElementById("privacy-btn");
+
+  const privacyHTML = `
+    <main id="privacy">
+      <h1>Politique de confidentialité — Epita-Map</h1>
+      <p><strong>Epita-Map</strong> ne collecte, ne stocke et ne partage aucune donnée personnelle.</p>
+
+      <h2>1. Données collectées</h2>
+      <ul>
+        <li>Aucune géolocalisation automatique.</li>
+        <li>Aucun compte utilisateur, aucun cookie de suivi.</li>
+        <li>Les adresses IP ne sont pas visibles par le serveur (tout le trafic passe via Cloudflare).</li>
+      </ul>
+
+      <h2>2. Sécurité</h2>
+      <p>Le site est protégé par Cloudflare (HTTPS, anti-DDoS). Les logs sont purement techniques, anonymes et temporaires.</p>
+
+      <h2>3. Conservation</h2>
+      <p>Aucune donnée n’est conservée de manière persistante. Le serveur est réinitialisé automatiquement pour garantir qu’aucune trace n’est gardée.</p>
+
+      <h2>4. Contact</h2>
+      <p>Pour toute question : <a href="mailto:contact@epita-map.fr">contact@epita-map.fr</a></p>
+
+      <a href="#" id="btn-return" class="btn-back">← Retourner sur la carte</a>
+    </main>
+  `;
+
+  privacyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
+      .forEach(el => el.style.display = "none");
+    container.innerHTML = privacyHTML;
+    container.style.background = "#f9fafb";
+    container.style.color = "#111";
+    container.style.padding = "2rem";
+    container.style.overflowY = "auto";
+  });
+
+  document.body.addEventListener("click", (e) => {
+    if (e.target && e.target.id === "btn-return") {
+      e.preventDefault();
+      location.reload();
+    }
+  });
+});
+</script>
 
 </body>
 </html>
