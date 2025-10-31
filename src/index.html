@@ -872,6 +872,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 svg.style.maxWidth = '100%';
                 svg.style.maxHeight = '100%';
                 
+                // Add white background with 10px padding around SVG
+                container.style.background = 'white';
+                container.style.padding = '10px';
+                
                 // Make SVG interactive
                 const rooms = svg.querySelectorAll('[id*="room"], [class*="room"], rect, path, polygon');
                 rooms.forEach(room => {
@@ -895,6 +899,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error('Error loading map:', error);
+            // Reset container background on error
+            container.style.background = '';
+            container.style.padding = '';
             container.innerHTML = `
                 <div style="text-align: center; padding: 2rem; color: #d32f2f;">
                     <h3>❌ Erreur de chargement</h3>
@@ -962,6 +969,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const query = searchInput.value.trim().toLowerCase();
         if (!query) return;
 
+        // Reset container background
+        container.style.background = '';
+        container.style.padding = '';
+
         const results = [];
         document.querySelectorAll('.menu-itm-stage').forEach(link => {
             const text = link.textContent.toLowerCase();
@@ -987,6 +998,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function displaySearchResults(results) {
+        // Reset container background when showing search results
+        container.style.background = '';
+        container.style.padding = '';
+        
         infoMenu.innerHTML = `
             <h3 style="margin-bottom: 1.5rem;">Résultats de recherche (${results.length})</h3>
         `;
