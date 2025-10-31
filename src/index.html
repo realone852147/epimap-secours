@@ -2,19 +2,27 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Epita-Map: Trouvez facilement votre salle à Epita et oubliez les 404 Room Not Found" />
     <meta name="keywords" content="Epimap Epita Map Plan Campus Epitech KB Villejuif" />
     <meta name="author" content="Nathan Chevalier & Mateo S." />
     <meta name="theme-color" content="#0d1230" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="Epita-Map - Plans des campus"/>
+    <meta property="og:description" content="Trouvez facilement votre salle à Epita"/>
+    <meta property="og:image" content="img/og-image.png"/>
+    <meta property="og:type" content="website"/>
+
     <title>Epita-Map</title>
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/onoffswitch.css" />
     <link rel="stylesheet" href="css/settings.css" />
     <link rel="stylesheet" href="css/darkmode.css" />
+
     <style>
-        /* Style du texte de la politique de confidentialité */
+        /* Politique confidentialité */
         #privacy {
             max-width: 800px;
             margin: 3rem auto;
@@ -24,17 +32,9 @@
             padding: 2rem;
             color: #111;
         }
-        #privacy h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        #privacy h2 {
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-        }
-        #privacy ul {
-            margin-left: 1.2rem;
-        }
+        #privacy h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+        #privacy h2 { font-size: 1.3rem; margin-top: 1.5rem; }
+        #privacy ul { margin-left: 1.2rem; }
         #privacy .btn-back {
             display: inline-block;
             margin-top: 2rem;
@@ -46,27 +46,25 @@
             font-weight: 600;
             transition: background 0.2s ease;
         }
-        #privacy .btn-back:hover {
-            background: #004999;
-        }
+        #privacy .btn-back:hover { background: #004999; }
     </style>
 </head>
 
 <body class="darkmode">
 
 <header>
-    <div id="btn-menu">
+    <div id="btn-menu" aria-label="Menu principal" role="button" tabindex="0">
         <div></div>
         <div></div>
         <div></div>
     </div>
-    <input type="text" name="search" placeholder="Search a room, a people..." />
-    <button></button>
+    <input type="text" name="search" placeholder="Search a room, a people..." aria-label="Recherche"/>
+    <button aria-label="Lancer la recherche"></button>
 </header>
 
-<div id="btn-settings"></div>
+<div id="btn-settings" aria-label="Paramètres" role="button"></div>
 
-<nav id="info-menu">
+<nav id="info-menu" aria-label="Informations salle">
     <div>
         <div></div>
         <div>
@@ -89,133 +87,27 @@
     </div>
 </nav>
 
-<nav id="nav-menu">
+<nav id="nav-menu" aria-label="Navigation campus">
     <a href="https://epita-map.fr/privacy" class="btn-back" id="privacy-btn">← Informations Vie Privée</a>
     <ul>
-        <li><a href="maps/kb.svg" class="menu-itm-campus">Kremlin-Bicêtre</a>
-            <ul>
-                <li><a href="#" class="menu-itm-building">Voltaire</a>
-                    <ul>
-                        <li><a href="maps/kb-voltaire-f-1.svg" class="menu-itm-stage">Voltaire Sous-sol</a></li>
-                        <li><a href="maps/kb-voltaire-f0.svg" class="menu-itm-stage">Voltaire RdC</a></li>
-                        <li><a href="maps/kb-voltaire-f1.svg" class="menu-itm-stage">Voltaire 1er étage</a></li>
-                        <li><a href="maps/kb-voltaire-f2.svg" class="menu-itm-stage">Voltaire 2ème étage</a></li>
-                        <li><a href="maps/kb-voltaire-f3.svg" class="menu-itm-stage">Voltaire 3ème étage</a></li>
-                        <li><a href="maps/kb-voltaire-f4.svg" class="menu-itm-stage">Voltaire 4ème étage</a></li>
-                        <li><a href="maps/kb-voltaire-f5.svg" class="menu-itm-stage">Voltaire 5ème étage</a></li>
-                        <li><a href="maps/kb-voltaire-f6.svg" class="menu-itm-stage">Voltaire 6ème étage</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">Paritalie</a>
-                    <ul>
-                        <li><a href="maps/kb-paritalie-f0.svg" class="menu-itm-stage">Paritalie RdC</a></li>
-                        <li><a href="maps/kb-paritalie-f1.svg" class="menu-itm-stage">Paritalie 1er étage</a></li>
-                        <li><a href="maps/kb-paritalie-f2.svg" class="menu-itm-stage">Paritalie 2ème étage</a></li>
-                        <li><a href="maps/kb-paritalie-f3.svg" class="menu-itm-stage">Paritalie 3ème étage</a></li>
-                        <li><a href="maps/kb-paritalie-f4.svg" class="menu-itm-stage">Paritalie 4ème étage</a></li>
-                        <li><a href="maps/kb-paritalie-f5.svg" class="menu-itm-stage">Paritalie 5ème étage</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">Pasteur</a>
-                    <ul>
-                        <li><a href="maps/kb-pasteur-f-2.svg" class="menu-itm-stage">Pasteur -2 (Under)</a></li>
-                        <li><a href="maps/kb-pasteur-f-1.svg" class="menu-itm-stage">Pasteur -1 (Inter-sol)</a></li>
-                        <li><a href="maps/kb-pasteur-f0.svg" class="menu-itm-stage">Pasteur RdC</a></li>
-                        <li><a href="maps/kb-pasteur-f1.svg" class="menu-itm-stage">Pasteur 1er étage</a></li>
-                        <li><a href="maps/kb-pasteur-f2.svg" class="menu-itm-stage">Pasteur 2ème étage</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li><a href="maps/vj.svg" class="menu-itm-campus">Villejuif</a>
-            <ul>
-                <li><a href="#" class="menu-itm-building">VA</a>
-                    <ul>
-                        <li><a href="maps/vj-va-f-1.svg" class="menu-itm-stage">VA Sous-sol</a></li>
-                        <li><a href="maps/vj-va-f0.svg" class="menu-itm-stage">VA RdC</a></li>
-                        <li><a href="maps/vj-va-f1.svg" class="menu-itm-stage">VA 1er étage</a></li>
-                        <li><a href="maps/vj-va-f2.svg" class="menu-itm-stage">VA 2ème étage</a></li>
-                        <li><a href="maps/vj-va-f3.svg" class="menu-itm-stage">VA 3ème étage</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">VB</a>
-                    <ul>
-                        <li><a href="#" class="menu-itm-stage">VB 0</a></li>
-                        <li><a href="#" class="menu-itm-stage">VB 1</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">VJC</a>
-                    <ul>
-                        <li><a href="maps/vj-vjc-f0b.svg" class="menu-itm-stage">VJC RdC Bas</a></li>
-                        <li><a href="maps/vj-vjc-f0h.svg" class="menu-itm-stage">VJC RdC Haut</a></li>
-                        <li><a href="maps/vj-vjc-f1.svg" class="menu-itm-stage">VJC 1er étage</a></li>
-                        <li><a href="maps/vj-vjc-f2.svg" class="menu-itm-stage">VJC 2ème étage</a></li>
-                        <li><a href="maps/vj-vjc-f3.svg" class="menu-itm-stage">VJC 3ème étage</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li><a href="#" class="menu-itm-campus">Lyon</a>
-            <ul>
-                <li><a href="#" class="menu-itm-building">Lyon 1</a>
-                    <ul>
-                        <li><a href="#" class="menu-itm-stage">Lyon RDC</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 1er</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 2ème</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 3ème</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 4ème</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 5ème</a></li>
-                        <li><a href="#" class="menu-itm-stage">Lyon 6ème</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">Rennes</a></li>
-                <li><a href="#" class="menu-itm-building">Strasbourg</a></li>
-            </ul>
-        </li>
-
-        <li><a href="#" class="menu-itm-campus">Toulouse</a>
-            <ul>
-                <li><a href="#" class="menu-itm-building">Campus C. Pauilhac</a>
-                    <ul>
-                        <li><a href="#" class="menu-itm-stage">Sous-sol</a></li>
-                        <li><a href="#" class="menu-itm-stage">RDC</a></li>
-                        <li><a href="#" class="menu-itm-stage">1er étage</a></li>
-                        <li><a href="#" class="menu-itm-stage">2ème étage</a></li>
-                        <li><a href="#" class="menu-itm-stage">3ème étage</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="menu-itm-building">Dépendance C. Roquelaine</a>
-                    <ul>
-                        <li><a href="#" class="menu-itm-stage">RDC</a></li>
-                        <li><a href="#" class="menu-itm-stage">1er</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li><a href="#" class="menu-itm-campus">SPÉCIALES</a>
-            <ul>
-                <li><a href="#" class="menu-itm-building">Évènements</a>
-                    <ul>
-                        <li><a href="maps/others-prologin-f2025.svg" class="menu-itm-stage">Finale Prologin 2025</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <div id="infooter">
-            Epita-Map.fr is not affiliated with IONIS Education Group<br />
-            Maintainer 1 : nathan.chevalier@epita.fr<br />
-            Maintainer 2 : mateo.schwab@epita.fr<br />
-            Hosted with 💖 by Mateo S. <br />
-            Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub Epita-Map</a><br />
-        </div>
+        <!-- Exemple de structure simplifiée -->
+        <li><a href="maps/kb.svg" class="menu-itm-campus">Kremlin-Bicêtre</a></li>
+        <li><a href="maps/vj.svg" class="menu-itm-campus">Villejuif</a></li>
+        <li><a href="#" class="menu-itm-campus">Lyon</a></li>
+        <li><a href="#" class="menu-itm-campus">Toulouse</a></li>
+        <li><a href="#" class="menu-itm-campus">SPÉCIALES</a></li>
     </ul>
+    <div id="infooter">
+        <p>
+        Epita-Map.fr est un projet étudiant indépendant, non affilié à IONIS Education Group.<br/>
+        Maintainers : Nathan Chevalier & Mateo S.<br/>
+        Hébergé avec 💖 par Mateo S.<br/>
+        <a href="https://github.com/realone852147/epimap-secours">Contribuer sur GitHub</a>
+        </p>
+    </div>
 </nav>
 
-<section id="settings">
+<section id="settings" aria-label="Paramètres">
     <h3>Paramètres</h3>
     <div class="setting">
         <div class="onoffswitch">
@@ -238,24 +130,16 @@
         <span>Enrichir l'affichage</span>
     </div>
     <div class="setting">
-        <select>
+        <select aria-label="Langue">
             <option value="">FR</option>
         </select>
         <span>Langue</span>
     </div>
-    <span>
-        Maintainer 1 : nathan.chevalier@epita.fr<br />
-        Maintainer 2 : mateo.schwab@epita.fr<br />
-        Hosted with 💖 by Mateo S. <br />
-        Contribute on <a href="https://github.com/realone852147/epimap-secours">GitHub</a>
-    </span>
 </section>
-
-<section id="cache"><div></div></section>
 
 <section id="container" class="darkmap" contenturl="maps/kb.svg"></section>
 
-<section id="map-label">
+<section id="map-label" aria-label="Étiquette carte">
     <div class="map-icon"></div>
     <div>
         <div>Information</div>
@@ -263,7 +147,14 @@
 </section>
 
 <footer>
-    <div class="log-box" style="display: none"><div>X</div></div>
+    <p>
+        Epita-Map.fr — Projet étudiant indépendant.<br/>
+        Maintainers : Nathan Chevalier & Mateo S.<br/>
+        Hébergé par Mateo S. 💖<br/>
+        <a href="https://github.com/realone852147/epimap-secours">Contribuer sur GitHub</a><br/>
+        <a href="privacy.html">Politique de confidentialité</a> | 
+        <a href="mentions.html">Mentions légales</a>
+    </p>
 </footer>
 
 <script src="js/request.js"></script>
@@ -272,7 +163,7 @@
 <script src="js/search.js"></script>
 <script src="js/darkmode.js"></script>
 
-<!-- === Gestion dynamique de la page de vie privée === -->
+<!-- Politique de confidentialité dynamique -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("container");
@@ -292,11 +183,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <h2>2. Sécurité</h2>
       <p>Le site est protégé par Cloudflare (HTTPS, anti-DDoS). Les logs sont purement techniques, anonymes et temporaires.</p>
+      <p>Le trafic passe via Cloudflare pour des raisons de sécurité : <a href="https://www.cloudflare.com/fr-fr/privacypolicy/">Politique de confidentialité Cloudflare</a>.</p>
 
       <h2>3. Conservation</h2>
       <p>Aucune donnée n’est conservée de manière persistante. Le serveur est réinitialisé automatiquement pour garantir qu’aucune trace n’est gardée.</p>
 
-      <h2>4. Contact</h2>
+      <h2>4. Mentions légales</h2>
+      <p>Responsable du site : Nathan Chevalier & Mateo S.<br/>
+      Email : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a>, <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br/>
+      Hébergeur : [Nom hébergeur], [Adresse], <a href="[site hébergeur]">Site</a><br/>
+      Finalité : Mise à disposition interactive des plans des campus Epita.</p>
+
+      <h2>5. Contact</h2>
       <p>Pour toute question : <a href="mailto:contact@epita-map.fr">contact@epita-map.fr</a></p>
 
       <a href="#" id="btn-return" class="btn-back">← Retourner sur la carte</a>
@@ -317,7 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", (e) => {
     if (e.target && e.target.id === "btn-return") {
       e.preventDefault();
-      location.reload();
+      container.innerHTML = "";
+      document.body.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
+        .forEach(el => el.style.display = "");
     }
   });
 });
