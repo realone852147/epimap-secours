@@ -16,24 +16,337 @@
 
 <title>Epita-Map</title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/onoffswitch.css" />
-<link rel="stylesheet" href="css/settings.css" />
-<link rel="stylesheet" href="css/darkmode.css" />
 
 <style>
-  /* Conteneur des cartes */
+  /* Reset & Base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  body.darkmode {
+    background: #0d1230;
+    color: #e0e0e0;
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  body.darkmode header {
+    background: #1a1f3a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  #btn-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+  }
+
+  #btn-menu div {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  body.darkmode #btn-menu div {
+    background: #e0e0e0;
+  }
+
+  header input[type="text"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  header input[type="text"]:focus {
+    border-color: #0066cc;
+  }
+
+  body.darkmode header input[type="text"] {
+    background: #2a2f4a;
+    border-color: #3a3f5a;
+    color: #e0e0e0;
+  }
+
+  header button {
+    padding: 0.75rem 1.5rem;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  header button:hover {
+    background: #0052a3;
+  }
+
+  header button::before {
+    content: "🔍";
+    margin-right: 0.5rem;
+  }
+
+  /* Settings Button */
+  #btn-settings {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: #0066cc;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  #btn-settings:hover {
+    transform: scale(1.1);
+  }
+
+  #btn-settings::before {
+    content: "⚙️";
+    font-size: 1.5rem;
+  }
+
+  /* Navigation Menu */
+  #nav-menu {
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: left 0.3s ease;
+    z-index: 101;
+    overflow-y: auto;
+  }
+
+  body.darkmode #nav-menu {
+    background: #1a1f3a;
+  }
+
+  #nav-menu.active {
+    left: 0;
+  }
+
+  #nav-menu .btn-back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  #nav-menu .btn-back:hover {
+    background: #0052a3;
+  }
+
+  #nav-menu ul {
+    list-style: none;
+  }
+
+  #nav-menu li {
+    margin-bottom: 0.5rem;
+  }
+
+  #nav-menu a.menu-itm-campus {
+    display: block;
+    padding: 1rem;
+    background: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  body.darkmode #nav-menu a.menu-itm-campus {
+    background: #2a2f4a;
+    color: #e0e0e0;
+  }
+
+  #nav-menu a.menu-itm-campus:hover {
+    background: #e0e0e0;
+  }
+
+  body.darkmode #nav-menu a.menu-itm-campus:hover {
+    background: #3a3f5a;
+  }
+
+  #infooter {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  body.darkmode #infooter {
+    border-color: #3a3f5a;
+    color: #999;
+  }
+
+  #infooter a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  #infooter a:hover {
+    text-decoration: underline;
+  }
+
+  /* Settings Panel */
+  #settings {
+    position: fixed;
+    right: -320px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: right 0.3s ease;
+    z-index: 101;
+    overflow-y: auto;
+  }
+
+  body.darkmode #settings {
+    background: #1a1f3a;
+  }
+
+  #settings.active {
+    right: 0;
+  }
+
+  #settings h3 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  body.darkmode .setting {
+    background: #2a2f4a;
+  }
+
+  /* Toggle Switch */
+  .onoffswitch {
+    position: relative;
+    width: 60px;
+    user-select: none;
+  }
+
+  .onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    border-radius: 30px;
+    background-color: #ccc;
+    transition: background-color 0.3s ease-in;
+  }
+
+  .onoffswitch-label:before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    background: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 28px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #0066cc;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 2px;
+  }
+
+  /* Container */
   #container {
     width: 100%;
-    height: 80vh; /* hauteur ajustable */
+    height: 80vh;
     min-height: 600px;
     overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
   }
-  .darkmap {
+
+  body.darkmode #container {
     background: #0d1230;
   }
 
-  /* Politique confidentialité */
+  #container svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* Privacy Page */
   .privacy-page {
     background: #f9fafb !important;
     color: #111 !important;
@@ -42,11 +355,28 @@
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     padding: 2rem;
-    overflow-y: auto;
   }
-  .privacy-page h1 { font-size: 1.8rem; margin-bottom: 1rem; }
-  .privacy-page h2 { font-size: 1.3rem; margin-top: 1.5rem; }
-  .privacy-page ul { margin-left: 1.2rem; }
+
+  .privacy-page h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .privacy-page h2 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .privacy-page ul {
+    margin-left: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .privacy-page li {
+    margin-bottom: 0.5rem;
+  }
+
   .privacy-page .btn-back {
     display: inline-block;
     margin-top: 2rem;
@@ -58,7 +388,134 @@
     font-weight: 600;
     transition: background 0.2s ease;
   }
-  .privacy-page .btn-back:hover { background: #004999; }
+
+  .privacy-page .btn-back:hover {
+    background: #004999;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  body.darkmode footer {
+    background: #1a1f3a;
+    border-color: #3a3f5a;
+    color: #999;
+  }
+
+  footer a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Map Label */
+  #map-label {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: none;
+  }
+
+  body.darkmode #map-label {
+    background: #1a1f3a;
+  }
+
+  /* Info Menu */
+  #info-menu {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 380px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: right 0.3s ease;
+    z-index: 101;
+    overflow-y: auto;
+  }
+
+  body.darkmode #info-menu {
+    background: #1a1f3a;
+  }
+
+  #info-menu.active {
+    right: 0;
+  }
+
+  .search-result {
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  body.darkmode .search-result {
+    background: #2a2f4a;
+  }
+
+  .search-result:hover {
+    background: #e0e0e0;
+  }
+
+  body.darkmode .search-result:hover {
+    background: #3a3f5a;
+  }
+
+  .search-result h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result span {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  body.darkmode .search-result span {
+    color: #999;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      padding: 0.75rem 1rem;
+    }
+
+    #nav-menu, #settings, #info-menu {
+      width: 100%;
+      left: -100%;
+    }
+
+    #settings {
+      right: -100%;
+    }
+
+    #info-menu {
+      right: -100%;
+    }
+
+    #btn-settings {
+      right: 1rem;
+      width: 45px;
+      height: 45px;
+    }
+  }
 </style>
 </head>
 
@@ -68,8 +525,8 @@
   <div id="btn-menu" aria-label="Menu principal" role="button" tabindex="0">
     <div></div><div></div><div></div>
   </div>
-  <input type="text" name="search" placeholder="Search a room, a people..." aria-label="Recherche"/>
-  <button aria-label="Lancer la recherche"></button>
+  <input type="text" name="search" placeholder="Rechercher une salle, une personne..." aria-label="Recherche"/>
+  <button aria-label="Lancer la recherche">Rechercher</button>
 </header>
 
 <div id="btn-settings" aria-label="Paramètres" role="button"></div>
@@ -78,40 +535,40 @@
   <div>
     <div></div>
     <div>
-      <h4>Room Name</h4>
-      <span>Room Description</span>
+      <h4>Nom de la salle</h4>
+      <span>Description de la salle</span>
       <div>
         <div></div>
         <div>
-          <h5>People Name</h5>
-          <span>People Description</span>
+          <h5>Nom de la personne</h5>
+          <span>Description de la personne</span>
         </div>
       </div>
     </div>
   </div>
   <div>
     <div id="search-result-template" class="search-result">
-      <h4></h4>
-      <span></span>
+      <h4>Résultat</h4>
+      <span>Description</span>
     </div>
   </div>
 </nav>
 
 <nav id="nav-menu" aria-label="Navigation campus">
-  <a href="https://epita-map.fr/privacy" class="btn-back" id="privacy-btn">← Informations Vie Privée</a>
+  <a href="#" class="btn-back" id="privacy-btn">← Vie Privée</a>
   <ul>
-    <li><a href="maps/kb.svg" class="menu-itm-campus">Kremlin-Bicêtre</a></li>
-    <li><a href="maps/vj.svg" class="menu-itm-campus">Villejuif</a></li>
-    <li><a href="#" class="menu-itm-campus">Lyon</a></li>
-    <li><a href="#" class="menu-itm-campus">Toulouse</a></li>
-    <li><a href="#" class="menu-itm-campus">SPÉCIALES</a></li>
+    <li><a href="#kb" class="menu-itm-campus" data-map="kb">🏫 Kremlin-Bicêtre</a></li>
+    <li><a href="#vj" class="menu-itm-campus" data-map="vj">🏫 Villejuif</a></li>
+    <li><a href="#lyon" class="menu-itm-campus" data-map="lyon">🏫 Lyon</a></li>
+    <li><a href="#toulouse" class="menu-itm-campus" data-map="toulouse">🏫 Toulouse</a></li>
+    <li><a href="#special" class="menu-itm-campus" data-map="special">⭐ SPÉCIALES</a></li>
   </ul>
   <div id="infooter">
     <p>
       Epita-Map.fr est un projet étudiant indépendant, non affilié à IONIS Education Group.<br/>
       Maintainers : Nathan Chevalier & Mateo S.<br/>
       Hébergé avec 💖 par Mateo S.<br/>
-      <a href="https://github.com/realone852147/epimap-secours">Contribuer sur GitHub</a>
+      <a href="https://github.com/realone852147/epimap-secours" target="_blank">Contribuer sur GitHub</a>
     </p>
   </div>
 </nav>
@@ -119,34 +576,34 @@
 <section id="settings" aria-label="Paramètres">
   <h3>Paramètres</h3>
   <div class="setting">
-    <div class="onoffswitch">
-      <input type="checkbox" name="darkmodeSwitch" class="onoffswitch-checkbox" id="darkmodeSwitch" tabindex="0">
-      <label class="onoffswitch-label" for="darkmodeSwitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-      </label>
-    </div>
     <span>Mode Sombre</span>
+    <div class="onoffswitch">
+      <input type="checkbox" name="darkmodeSwitch" class="onoffswitch-checkbox" id="darkmodeSwitch" tabindex="0" checked>
+      <label class="onoffswitch-label" for="darkmodeSwitch"></label>
+    </div>
   </div>
   <div class="setting">
+    <span>Enrichir l'affichage</span>
     <div class="onoffswitch">
       <input type="checkbox" name="enrichedSwitch" class="onoffswitch-checkbox" id="enrichedSwitch" tabindex="0">
-      <label class="onoffswitch-label" for="enrichedSwitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-      </label>
+      <label class="onoffswitch-label" for="enrichedSwitch"></label>
     </div>
-    <span>Enrichir l'affichage</span>
   </div>
   <div class="setting">
-    <select aria-label="Langue">
-      <option value="">FR</option>
-    </select>
     <span>Langue</span>
+    <select aria-label="Langue">
+      <option value="fr">🇫🇷 FR</option>
+      <option value="en">🇬🇧 EN</option>
+    </select>
   </div>
 </section>
 
-<section id="container" class="darkmap" contenturl="maps/kb.svg"></section>
+<section id="container" contenturl="maps/kb.svg">
+  <div style="text-align: center; color: #666;">
+    <h2>Bienvenue sur Epita-Map</h2>
+    <p>Sélectionnez un campus dans le menu pour afficher le plan</p>
+  </div>
+</section>
 
 <section id="map-label" aria-label="Étiquette carte">
   <div class="map-icon"></div>
@@ -158,23 +615,42 @@
     Epita-Map.fr — Projet étudiant indépendant.<br/>
     Maintainers : Nathan Chevalier & Mateo S.<br/>
     Hébergé par Mateo S. 💖<br/>
-    <a href="https://github.com/realone852147/epimap-secours">Contribuer sur GitHub</a><br/>
-    <a href="privacy.html">Politique de confidentialité</a> | 
-    <a href="mentions.html">Mentions légales</a>
+    <a href="https://github.com/realone852147/epimap-secours" target="_blank">Contribuer sur GitHub</a><br/>
+    <a href="#privacy" id="footer-privacy-link">Politique de confidentialité</a> | 
+    <a href="#mentions" id="footer-mentions-link">Mentions légales</a>
   </p>
 </footer>
 
-<script src="js/request.js"></script>
-<script src="js/script.js"></script>
-<script src="js/maps.js"></script>
-<script src="js/search.js"></script>
-<script src="js/darkmode.js"></script>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+  const btnMenu = document.getElementById("btn-menu");
+  const btnSettings = document.getElementById("btn-settings");
+  const navMenu = document.getElementById("nav-menu");
+  const settings = document.getElementById("settings");
   const container = document.getElementById("container");
+  const darkmodeSwitch = document.getElementById("darkmodeSwitch");
   const privacyBtn = document.getElementById("privacy-btn");
+  const footerPrivacyLink = document.getElementById("footer-privacy-link");
 
+  // Toggle Menu
+  btnMenu.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    settings.classList.remove("active");
+  });
+
+  // Toggle Settings
+  btnSettings.addEventListener("click", () => {
+    settings.classList.toggle("active");
+    navMenu.classList.remove("active");
+  });
+
+  // Dark Mode Toggle
+  darkmodeSwitch.addEventListener("change", () => {
+    body.classList.toggle("darkmode");
+  });
+
+  // Privacy Page HTML
   const privacyHTML = `
     <main class="privacy-page">
       <h1>Politique de confidentialité — Epita-Map</h1>
@@ -189,16 +665,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <h2>2. Sécurité</h2>
       <p>Le site est protégé par Cloudflare (HTTPS, anti-DDoS). Les logs sont purement techniques, anonymes et temporaires.</p>
-      <p>Le trafic passe via Cloudflare pour des raisons de sécurité : <a href="https://www.cloudflare.com/fr-fr/privacypolicy/">Politique Cloudflare</a>.</p>
+      <p>Le trafic passe via Cloudflare pour des raisons de sécurité : <a href="https://www.cloudflare.com/fr-fr/privacypolicy/" target="_blank">Politique Cloudflare</a>.</p>
 
       <h2>3. Conservation</h2>
-      <p>Aucune donnée n’est conservée de manière persistante. Le serveur est réinitialisé automatiquement pour garantir qu’aucune trace n’est gardée.</p>
+      <p>Aucune donnée n'est conservée de manière persistante. Le serveur est réinitialisé automatiquement pour garantir qu'aucune trace n'est gardée.</p>
 
       <h2>4. Mentions légales</h2>
       <p>Responsable du site : Nathan Chevalier & Mateo S.<br/>
       Email : <a href="mailto:nathan.chevalier@epita.fr">nathan.chevalier@epita.fr</a>, 
       <a href="mailto:mateo.schwab@epita.fr">mateo.schwab@epita.fr</a><br/>
-      Hébergeur : [Nom hébergeur], [Adresse], <a href="[site hébergeur]">Site</a><br/>
+      Hébergeur : [Nom hébergeur], [Adresse]<br/>
       Finalité : Mise à disposition interactive des plans des campus Epita.</p>
 
       <h2>5. Contact</h2>
@@ -208,20 +684,60 @@ document.addEventListener("DOMContentLoaded", () => {
     </main>
   `;
 
-  privacyBtn.addEventListener("click", (e) => {
+  // Show Privacy Page
+  function showPrivacy(e) {
     e.preventDefault();
-    document.body.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
+    document.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
       .forEach(el => el.style.display = "none");
     container.innerHTML = privacyHTML;
-  });
+    container.style.height = "auto";
+  }
 
+  privacyBtn.addEventListener("click", showPrivacy);
+  footerPrivacyLink.addEventListener("click", showPrivacy);
+
+  // Return from Privacy
   document.body.addEventListener("click", (e) => {
     if (e.target && e.target.id === "btn-return") {
       e.preventDefault();
-      container.innerHTML = "";
-      document.body.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
+      container.innerHTML = `
+        <div style="text-align: center; color: #666;">
+          <h2>Bienvenue sur Epita-Map</h2>
+          <p>Sélectionnez un campus dans le menu pour afficher le plan</p>
+        </div>
+      `;
+      container.style.height = "80vh";
+      document.querySelectorAll("header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer")
         .forEach(el => el.style.display = "");
     }
+  });
+
+  // Close menus on outside click
+  document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && !btnMenu.contains(e.target)) {
+      navMenu.classList.remove("active");
+    }
+    if (!settings.contains(e.target) && !btnSettings.contains(e.target)) {
+      settings.classList.remove("active");
+    }
+  });
+
+  // Campus selection (placeholder - you'll need to load actual SVG maps)
+  document.querySelectorAll(".menu-itm-campus").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const campus = e.target.dataset.map;
+      container.innerHTML = `
+        <div style="text-align: center; color: #666;">
+          <h2>Plan du campus ${e.target.textContent}</h2>
+          <p>Chargement en cours...</p>
+          <p style="font-size: 0.9rem; margin-top: 1rem;">
+            (Connectez vos fichiers SVG maps/${campus}.svg pour afficher le plan)
+          </p>
+        </div>
+      `;
+      navMenu.classList.remove("active");
+    });
   });
 });
 </script>
