@@ -23,6 +23,11 @@ body {
     background: #f5f5f5;
     color: #333;
     overflow-x: hidden;
+    position: relative;
+}
+
+body.legal-mode {
+    overflow: hidden;
 }
 
 body.darkmode {
@@ -398,6 +403,21 @@ body.darkmode #settings > span {
     position: relative;
 }
 
+#container.legal-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    display: block;
+    align-items: initial;
+    justify-content: initial;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
 body.darkmode #container {
     background: #0d1230;
 }
@@ -550,12 +570,12 @@ footer a:hover {
 .legal-page {
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3rem 2rem;
     background: white !important;
     border-radius: 0;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     color: #111 !important;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .legal-page h1 {
@@ -685,8 +705,8 @@ footer a:hover {
 /* Responsive Legal Pages */
 @media (max-width: 1024px) {
     .legal-page {
-        margin: 2rem auto;
-        max-width: 95%;
+        max-width: 100%;
+        padding: 2rem 1.5rem 4rem 1.5rem;
     }
 }
 
@@ -726,8 +746,7 @@ footer a:hover {
     }
 
     .legal-page {
-        margin: 1rem;
-        padding: 1.5rem;
+        padding: 2rem 1rem 5rem 1rem;
     }
 
     .legal-page h1 {
@@ -754,27 +773,37 @@ footer a:hover {
     }
 
     .legal-page .btn-back {
-        width: 100%;
+        width: calc(100% - 2rem);
+        max-width: 500px;
         justify-content: center;
-        padding: 0.875rem 1.5rem;
+        padding: 1rem 1.5rem;
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        background: #0066cc;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        z-index: 100;
     }
 }
 
 @media (max-width: 480px) {
     .legal-page {
-        margin: 0.5rem;
-        padding: 1rem;
-        border-radius: 8px;
+        padding: 1.5rem 1rem 6rem 1rem;
+        min-height: 100vh;
     }
 
     .legal-page h1 {
         font-size: 1.3rem;
         flex-wrap: wrap;
+        margin-bottom: 1rem;
     }
 
     .legal-page h2 {
         font-size: 1.1rem;
         flex-wrap: wrap;
+        margin-top: 1.5rem;
     }
 
     .legal-page p {
@@ -796,6 +825,16 @@ footer a:hover {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.25rem;
+    }
+
+    .legal-page .btn-back {
+        width: calc(100% - 2rem);
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        transform: none;
+        padding: 1rem;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
     }
 }
 
@@ -1563,37 +1602,53 @@ const legalPages = {
 // Show Legal Pages
 function showLegalPage(type) {
     const container = document.getElementById('container');
+    const body = document.body;
     const elements = document.querySelectorAll('header, #btn-settings, #info-menu, #nav-menu, #settings, #map-label, footer');
     
     // Hide all elements
     elements.forEach(el => el.style.display = 'none');
     
+    // Add legal mode classes
+    container.classList.add('legal-view');
+    body.classList.add('legal-mode');
+    
     // Show legal content
     container.innerHTML = legalPages[type];
     container.style.background = '#f5f5f5';
-    container.style.padding = '0';
-    container.style.overflow = 'auto';
+    
+    // Force scroll to top immediately
+    setTimeout(() => {
+        container.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 0);
     
     // Add close button handler
-    document.getElementById('close-legal').addEventListener('click', () => {
-        elements.forEach(el => el.style.display = '');
-        container.innerHTML = `
-            <div style="text-align: center; padding: 2rem;">
-                <div class="loading"></div>
-                <p style="margin-top: 1rem;">Chargement de la carte...</p>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Sélectionnez un étage dans le menu</p>
-            </div>
-        `;
-        container.style.background = '';
-        container.style.padding = '';
-        
-        // Reload default map
-        const defaultMap = 'maps/kb.svg';
-        const loadMapFunc = window.loadMapFunction;
-        if (loadMapFunc) {
-            loadMapFunc(defaultMap);
-        }
-    });
+    const closeBtn = document.getElementById('close-legal');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            // Remove legal mode classes
+            container.classList.remove('legal-view');
+            body.classList.remove('legal-mode');
+            
+            elements.forEach(el => el.style.display = '');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="loading"></div>
+                    <p style="margin-top: 1rem;">Chargement de la carte...</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Sélectionnez un étage dans le menu</p>
+                </div>
+            `;
+            container.style.background = '';
+            
+            // Reload default map
+            const defaultMap = 'maps/kb.svg';
+            const loadMapFunc = window.loadMapFunction;
+            if (loadMapFunc) {
+                loadMapFunc(defaultMap);
+            }
+        });
+    }
 }
 
 // Add event listeners for legal links
